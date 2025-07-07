@@ -24,6 +24,9 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/myFlix-angular",
+            "baseHref": "/myflix-ang/", 
+            
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -98,6 +101,9 @@
               "src/styles.scss"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
