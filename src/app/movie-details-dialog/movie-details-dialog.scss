@@ -1,0 +1,53 @@
+/* Round the dialog container and reset default padding */
+::ng-deep .mat-dialog-container {
+  border-radius: 8px;
+  padding: 0;
+}
+
+/* Title bar styling */
+.dialog-title {
+  margin: 0;
+  padding: 16px 24px;
+  font-size: 1.4rem;
+  background: #f5f5f5;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+/* Main content area */
+.dialog-content {
+  padding: 16px 24px;
+  font-size: 1rem;
+  color: #424242;
+  line-height: 1.5;
+
+  p {
+    margin: 8px 0;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  mat-list {
+    margin-top: 16px;
+  }
+
+  mat-list-item {
+    padding: 4px 0;
+  }
+}
+
+/* Footer / actions */
+.mat-dialog-actions {
+  padding: 8px 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-dialog-actions button {
+  text-transform: none;
+}

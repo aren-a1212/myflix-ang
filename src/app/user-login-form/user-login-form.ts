@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
   selector: 'app-user-login-form',
   standalone: false,
   templateUrl: './user-login-form.html',
-  styleUrl: './user-login-form.scss'
+  styleUrls: ['./user-login-form.scss']
 })
 export class UserLoginForm implements OnInit {
-  @Input() userData= {Username : '', Password: ''};
+  @Input() userData= {username : '', password: ''};
   constructor(
     public FetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginForm>,
@@ -29,10 +29,13 @@ export class UserLoginForm implements OnInit {
     this.FetchApiData.userLogin(this.userData).subscribe((result)=>{
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
+      localStorage.setItem('username', result.user.username);
+
       this.dialogRef.close();
       this.snackBar.open('Login Succesful', 'OK', {
         duration : 2000,
       });
+      this.router.navigate(['movies']);
     }, (result)=>{
       this.snackBar.open('Login failed -'+ result, 'OK', {
         duration: 2000

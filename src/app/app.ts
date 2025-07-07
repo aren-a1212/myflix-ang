@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { UserRegistrationForm } from './user-registration-form/user-registration-form';
-import { MatDialog } from '@angular/material/dialog';
-import { UserLoginForm } from './user-login-form/user-login-form';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
@@ -10,16 +8,25 @@ import { UserLoginForm } from './user-login-form/user-login-form';
 })
 export class App {
   protected title = 'myFlix-angular';
+  isLoggedIn: boolean = false;
 
-  constructor(public dialog: MatDialog){}
-  openUserRegistrationDialog(): void{
-    this.dialog.open(UserRegistrationForm, {
-      width:'280px'
-    });
+  constructor(public router: Router) {
+    this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd) {
+        const user = localStorage.getItem('user');
+        this.isLoggedIn = !!user;
+      }
+    })
   }
-  openUserLoginDialog(): void{
-    this.dialog.open(UserLoginForm, {
-      width:'280px'
-    });
+
+  /**
+   * Method to logout a user
+   */
+  logout(): void {
+    // clear local storage
+    localStorage.clear();
+
+    //redirect to welcome page
+    this.router.navigate(['welcome']);
   }
 }

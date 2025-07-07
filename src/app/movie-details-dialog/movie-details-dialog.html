@@ -1,0 +1,50 @@
+<!-- movie-details-dialog.html -->
+<h2 mat-dialog-title class="dialog-title">
+  {{ movie.title }}
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  <!-- Synopsis -->
+  <p *ngIf="movie.description">
+    <strong>Synopsis:</strong> {{ movie.description }}
+  </p>
+
+  <!-- Genre -->
+  <p>
+    <strong>Genre:</strong>
+    {{ movie.genre.name }} — {{ movie.genre.description }}
+  </p>
+
+  <!-- Director -->
+  <p>
+    <strong>Director:</strong> {{ movie.director.name }}
+  </p>
+
+  <!-- Release Year, Duration, Rating -->
+  <p>
+    <strong>Release Year:</strong> {{ movie.releaseYear }}
+  </p>
+  <p>
+    <strong>Duration:</strong> {{ movie.durationMinutes }} min
+  </p>
+  <p>
+    <strong>Rating:</strong> {{ movie.rating }}/10
+  </p>
+
+  <!-- Cast -->
+  <div *ngIf="movie.cast && movie.cast.length">
+    <strong>Cast:</strong>
+    <mat-list>
+      <mat-list-item *ngFor="let actor of movie.cast">
+        {{ actor.name }} <em>as</em> {{ actor.role }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="closeDialog()">
+    Close
+  </button>
+</mat-dialog-actions>
+

@@ -3,6 +3,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService,  } from '../fetch-api-data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
+
+
 @Component({
   selector: 'app-user-registration-form',
   standalone: false,
@@ -11,7 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserRegistrationForm implements OnInit {
 
-@Input() userData= {Username: '', Password: '', Email: '', Birthday:''};
+@Input() userData= {username: '', password: '', email: '', firstName: '',
+  lastName: '', birthday:''};
 
 constructor(
   public FetchApiData:FetchApiDataService,
@@ -24,6 +28,8 @@ constructor(
 
   registerUser(): void{
     this.FetchApiData.userRegistration(this.userData).subscribe((Response)=>{
+      localStorage.setItem('username', Response.user.username);
+
       this.dialogRef.close();
       console.log(Response);
       this.snackBar.open('user registered', 'OK', {

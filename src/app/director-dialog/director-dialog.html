@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>{{ director.name }}</h2>
+
+<mat-dialog-content>
+  <p *ngIf="director.bio">
+    <strong>Bio:</strong> {{ director.bio }}
+  </p>
+
+  <p *ngIf="director.birthYear || director.deathYear">
+    <strong>Born:</strong> {{ director.birthYear }}
+    <span *ngIf="director.deathYear">
+      — <strong>Died:</strong> {{ director.deathYear }}
+    </span>
+  </p>
+
+  <div *ngIf="movies.length">
+    <strong>Movies:</strong>
+    <mat-list>
+      <mat-list-item *ngFor="let m of movies">
+        {{ m.title }} ({{ m.releaseYear }})
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <p *ngIf="!movies.length">
+    <em>No movies found for this director.</em>
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>
+
