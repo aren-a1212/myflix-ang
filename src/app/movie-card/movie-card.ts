@@ -8,6 +8,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsDialog } from '../movie-details-dialog/movie-details-dialog';
 import { GenreDialog } from '../genre-dialog/genre-dialog';
 import { DirectorDialog } from '../director-dialog/director-dialog';
+
+/**
+ * Movie card component for displaying and managing movies
+ */
+
+
 @Component({
   selector: 'app-movie-card',
   standalone: false,
@@ -27,6 +33,7 @@ export class MovieCard implements OnInit{
   ngOnInit():void{
     this.getMovies();
   }
+    /** Fetches movies with posters from APIs */
    getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((baseList: any[]) => {
     // build one poster-fetch observable per movie
@@ -58,21 +65,14 @@ export class MovieCard implements OnInit{
     });
   });
 }
-     /**
-   * Checks if a movie is a favorite
-   * @param movieId ID of the movie to check
-   * @returns True if the movie is a favorite, false otherwise
-   */
+   /** Checks if movie is favorite */
   isFavorite(movieId: string): boolean {
     const localUser: string | null = localStorage.getItem('user');
     const parsedUser: any = localUser && JSON.parse(localUser);
     return parsedUser.FavoriteMovies.includes(movieId);
   }
 
-  /**
-   * Handler to add a movie to user favorites or to remove it
-   * @param movieId The movie id to add or remove from or to favorites
-   */
+    /** Toggles movie favorite status */
   handleFavorite(movieId: string): void {
     const localUser: string | null = localStorage.getItem('user');
     const parsedUser: any = localUser && JSON.parse(localUser);
@@ -122,10 +122,7 @@ addFavorite(movieId: string): void {
 }
 
 
-  /**
-   * Method to open the dialog with informations about a director
-   * @param director The director informations object
-   */
+    /** Opens director info dialog */
   openDirectorDialog(director: any): void {
      const moviesByDirector = this.movies.filter(
     m => m.director.name === director.name
@@ -138,11 +135,7 @@ addFavorite(movieId: string): void {
       }
     });
   }
-
-  /**
-   * Method to open the dialog with informations about a genre
-   * @param genre The genre informations object
-   */
+  /** Opens genre info dialog */
   openGenreDialog(genre: any): void {
     this.dialog.open(GenreDialog, {
       width: '400px',
@@ -150,10 +143,7 @@ addFavorite(movieId: string): void {
     });
   }
 
-  /**
-   * Method to open the dialog with informations about a movie
-   * @param movie The movie informations object
-   */
+    /** Opens movie details dialog */
   openMovieDetailsDialog(movie: any): void {
     this.dialog.open(MovieDetailsDialog, {
       width: '400px',

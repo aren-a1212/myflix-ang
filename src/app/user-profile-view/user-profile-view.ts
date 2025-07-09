@@ -10,6 +10,9 @@ import { GenreDialog } from '../genre-dialog/genre-dialog';
 
 
 
+/**
+ * User profile view component
+ */
 
 @Component({
   selector: 'app-user-profile-view',
@@ -18,6 +21,7 @@ import { GenreDialog } from '../genre-dialog/genre-dialog';
   styleUrls: ['./user-profile-view.scss']
 })
 export class UserProfileView implements OnInit   {
+    /** User profile data */
 @Input() user: any = {};
 
 @Input() birthday :string= '';
@@ -42,12 +46,17 @@ public router: Router
 ngOnInit(): void {
     this.getUserData();
 }
+
+ /** Gets formatted birthday */
 get displaybirthday() {
   return this.birthday;
 }
+  /** Sets birthday value */
 set displaybirthday(v) {
 this.user.birthday = v; 
 }
+
+  /** Fetches user data from API */
 getUserData(): void {
   const localUser : string| null= localStorage.getItem('user');
 
@@ -65,6 +74,7 @@ getUserData(): void {
       this.getFavoriteMovies();
     });
   }
+   /** Updates user profile */
  updateUser(): void {
   console.log('Updating user:', this.user);
     this.fetchApiData.editUser(this.user).subscribe(
@@ -85,10 +95,7 @@ getUserData(): void {
       }
     );
   }
-      /**
-   * 
-   * @return The favorite movies
-   */
+        /** Gets user's favorite movies */
   getFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       const allMovies: any[] = resp;
@@ -98,10 +105,7 @@ getUserData(): void {
       return this.favoriteMovies;
     });
   }
-      /**
-  * Handler to remove a movie from user favorites
-   * @param movieId The movie id to remove from user favorites
-   */
+     /** Removes movie from favorites */
   removeFavorite(movieId: string): void {
 
    this.fetchApiData.deleteFavoriteMovie(movieId).subscribe({
@@ -120,10 +124,7 @@ getUserData(): void {
   
 
       
- /**
- * Method to open the dialog with informations about a director
- * @param director The director information
- */
+   /** Opens director details dialog */
 openDirectorDialog(director: any): void {
    const moviesByDirector = this.favoriteMovies.filter(
       (m: any) => m.director.name === director.name
@@ -137,10 +138,7 @@ openDirectorDialog(director: any): void {
   });
 }
 
-/**
- * Method to open the dialog with informations about a genre
- * @param genre The genre information
- */
+  /** Opens genre details dialog */
 openGenreDialog(genre: any): void {
   this.dialog.open(GenreDialog, {
     width: '400px',
@@ -148,10 +146,7 @@ openGenreDialog(genre: any): void {
   });
 }
 
-/**
- * Method to open the dialog with informations about a movie
- * @param movie The movie information
- */
+  /** Opens movie details dialog */
 openMovieDetailsDialog(movie: any): void {
   this.dialog.open(MovieDetailsDialog, {
     width: '400px',

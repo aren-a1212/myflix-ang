@@ -8,6 +8,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../fetch-api-data';
 import { Router } from '@angular/router';
 
+
+
+/**
+ * User login view component
+ */
+
 @Component({
   selector: 'app-user-login-form',
   standalone: false,
@@ -16,6 +22,12 @@ import { Router } from '@angular/router';
 })
 export class UserLoginForm implements OnInit {
   @Input() userData= {username : '', password: ''};
+   /**
+   * @param FetchApiData - API service
+   * @param dialogRef - Dialog reference
+   * @param snackBar - Notification service
+   * @param router - Navigation service
+   */
   constructor(
     public FetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginForm>,
@@ -25,12 +37,13 @@ export class UserLoginForm implements OnInit {
   ngOnInit(): void {
   }
 
+  /** Authenticates user and handles response */
   loginUser(): void {
     this.FetchApiData.userLogin(this.userData).subscribe((result)=>{
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
       localStorage.setItem('username', result.user.username);
-
+     // Close dialog and navigate
       this.dialogRef.close();
       this.snackBar.open('Login Succesful', 'OK', {
         duration : 2000,

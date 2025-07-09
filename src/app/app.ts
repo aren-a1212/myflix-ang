@@ -1,5 +1,21 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+
+/**
+ * The root component of the Angular application
+ * 
+ * @remarks
+ * - Serves as the main container for the entire application
+ * - Handles global authentication state and routing events
+ * - Provides logout functionality
+ * 
+ * @example
+ * ```html
+ * <app-root></app-root>
+ * ```
+ */
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
@@ -19,9 +35,8 @@ export class App {
     })
   }
 
-  /**
-   * Method to logout a user
-   */
+  
+  
   logout(): void {
     // clear local storage
     localStorage.clear();

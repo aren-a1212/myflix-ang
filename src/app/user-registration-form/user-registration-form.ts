@@ -3,7 +3,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService,  } from '../fetch-api-data';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
+/**
+ * User registration form component
+ */
 
 
 @Component({
@@ -13,9 +15,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-registration-form.scss']
 })
 export class UserRegistrationForm implements OnInit {
-
+ /** User data input for registration */
 @Input() userData= {username: '', password: '', email: '', firstName: '',
   lastName: '', birthday:''};
+
+ /**
+   * @param FetchApiData - API service
+   * @param dialogRef - Dialog reference
+   * @param snackBar - Notification service
+   */
+
 
 constructor(
   public FetchApiData:FetchApiDataService,
@@ -25,7 +34,7 @@ constructor(
 
   }
 
-
+ /** Registers user and handles response */
   registerUser(): void{
     this.FetchApiData.userRegistration(this.userData).subscribe((Response)=>{
       localStorage.setItem('username', Response.user.username);
